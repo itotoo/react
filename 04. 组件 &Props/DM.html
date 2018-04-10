@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4. 组件 Props</title>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- 函数 -->
+    <!-- 组件名称必须以大写字母开头。 -->
+    <!-- 在使用该组件时你必须定义或引入它。 -->
+    <!-- 组件可以在它的输出中引用其它组件 -->
+    <!-- 组件的返回值只能有一个根元素。这也是我们要用一个<div>来包裹所有 -->
+    <!-- 组件之间通信 -->
+    
+    <div id="root">
+        <!-- 真实DOM -->
+    </div>
+
+
+    <script type="text/babel">
+        // 定义组件1
+        function Time(props){
+            return (
+                <div>
+                    {props.date.toLocaleTimeString()}
+                </div>
+            );
+        }
+        // 定义组件2
+        function UserInfo(props) {// 用户信息
+            return (
+                <div>
+                    <Time date={props.date} />
+                </div>
+            );
+        }
+        function Comment(props) {
+            return (
+                <div>
+                    <UserInfo date = {props.date}/>
+                </div>
+            );
+        }
+        // 
+        const comment = {
+            date: new Date(),
+        };
+        // 多次渲染Welcome组件
+        const element = (
+            <div>
+                <Comment date={comment.date} />
+            </div>
+        );
+        ReactDOM.render(
+            element,
+            document.getElementById('root')
+        );
+
+    </script>
+
+</body>
+</html>

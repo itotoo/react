@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>9. 表单</title>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- <input>，<textarea>，<select> -->
+    <!-- setState() 都通过传入一个value属性来实现对组件的控制-->
+    <!-- React控制的输入表单元素称为“受控组件” -->
+
+    <div id="input">
+        <!-- 展示区 -->
+    </div>
+    <script type="text/babel">
+        class Input extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    username:1,
+                    phone:2,
+                };
+                this.changeValue = this.changeValue.bind(this);
+            }
+            changeValue(event){
+                const name = event.target.name;
+                this.setState({
+                    [name]: event.target.value
+                });
+            }
+            render(){
+                return (
+                    <div>
+                        <input name='username' type="text" value={this.state.username} onChange={this.changeValue} />
+                        <input name='phone' type="text" value={this.state.phone} onChange={this.changeValue} />
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Input />,
+            document.getElementById('input')
+        );
+    </script>
+    <!-- ------------------------------ ------------------------------ ------------------------------ -->
+
+    <div id="textarea">
+        <!-- 展示区 -->
+    </div>
+    <script type="text/babel">
+        // 与input写法一样 
+        class Input extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {value:'textarea'};
+                this.changeValue = this.changeValue.bind(this);
+            }
+            changeValue(event){
+                this.setState({ value:event.target.value });
+            }
+            render(){
+                return (
+                    <textarea value={this.state.value} onChange={this.changeValue} name="" id="" cols="30" rows="10"></textarea>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Input />,
+            document.getElementById('textarea')
+        );
+    </script>
+    <!-- ------------------------------ ------------------------------ ------------------------------ -->
+    <div id="select">
+        <!-- 展示区 -->
+    </div>
+    <script type="text/babel">
+        // 与input写法一样 
+        class Input extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {value : 'coconut'};
+                this.changeValue = this.changeValue.bind(this);
+                this.showVal = this.showVal.bind(this);
+            }
+            changeValue(event){
+                this.setState({ value:event.target.value });
+            }
+            showVal(){
+                console.log(this.state.value)
+            }
+            render(){
+                return (
+                    <div>
+                        <select value={this.state.value} onChange={this.changeValue}>
+                            <option value="grapefruit">Grapefruit</option>
+                            <option value="lime">Lime</option>
+                            <option value="coconut">Coconut</option>
+                            <option value="mango">Mango</option>
+                        </select>
+                        <button onClick={this.showVal}>按钮</button>   
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Input />,
+            document.getElementById('select')
+        );
+    </script>
+    <!-- ------------------------------ ------------------------------ ------------------------------ -->
+    
+</body>
+</html>

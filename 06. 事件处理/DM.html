@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- 绑定事件，删除事件，绑定一次性事件 -->
+    <!-- 驼峰式语法 onClick={activateLasers} -->
+    <!-- 必须使用 e.preventDefault 阻止默认行为 -->
+    <!-- this问题，类的方法默认是不会绑定 this 的，建议在构造函数中绑定或使用属性初始化器语法 -->
+    <!-- bind ， 箭头函数 ，  -->
+
+    <div id="root">
+        <!-- 真实DOM -->
+    </div>
+
+    <script type="text/babel">
+        class Clcik extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {name:'Hello world!'};
+            }
+            handleClick = (name, e) => {
+                console.log('this is:',this);
+                console.log('this is:',name );
+                console.log('this is:',e);
+            }
+            render(){
+                return (
+                    <button onClick={this.handleClick.bind(this,this.state.name)}>
+                        Click me
+                    </button>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Clcik />,
+            document.getElementById('root')
+        );
+
+
+    </script>
+</body>
+</html>

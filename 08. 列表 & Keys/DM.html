@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8. 列表 Keys</title>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- 渲染多个组件 -->
+    <!-- key -->
+
+    <div id="root">
+        <!-- 真实DOM -->
+    </div>
+    
+    <script type="text/babel">
+        class List extends React.Component{
+            constructor(props){
+                super(props);
+                this.data = [1, 2, 3, 4, 5];
+            }
+            componentDidMount(){
+                // 异步执行？有问题
+            }
+            render(){
+                this.listItems = this.data.map((index) =>
+                    <li key={index}>{index}</li>
+                );
+                return (
+                    <ul>{this.listItems}</ul>
+                );
+            }
+        }
+        ReactDOM.render(
+            <List />,
+            document.getElementById('root')
+        );
+    </script>
+    
+</body>
+</html>

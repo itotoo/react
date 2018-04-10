@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11. 组合 vs 继承</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- 建议使用组合而不是继承来复用组件 -->
+    <!-- 复用 UI 无关的功能，我们建议将其提取到单独的 JavaScript 模块中。 -->
+
+
+    <div id="root">
+        <!-- 真实DOM -->
+    </div>
+
+    <script type="text/babel">
+        function Border(props) {
+            return (
+                <div className = { props.color}>
+                    {props.left}
+                    {props.children}
+                </div>
+            );
+        }
+        function Left(){
+            return (
+                <div className="left">
+                    <h1>Left</h1>
+                </div>
+            );
+        }
+        class App extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {bool: true};
+            }
+            render(){
+                return (
+                    <Border color='pink' left={<Left />}>
+                        <h1>
+                            welcome h1
+                        </h1>
+                    </Border>
+                )
+            }
+        }
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+
+</body>
+</html>

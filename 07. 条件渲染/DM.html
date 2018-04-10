@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>7. 条件渲染</title>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="../react/babel.min.js"></script>
+</head>
+<body>
+    <!-- 创建不同的组件来封装各种你需要的行为。然后还可以根据应用的状态变化只渲染其中的一部分。 -->
+    <!-- jsx if else -->
+    <!-- jsx {boolean &&}  -->
+    <!-- jsx {?:} -->
+    <!-- return null; -->
+
+
+    <div id="root">
+        <!-- 真实DOM -->
+    </div>
+
+    <script type="text/babel">
+        // 组件1
+        function Element1(props) {
+            return <h1>组件1</h1>;
+        }
+        // 组件2
+        function Element2(props) {
+            return <h1>组件2</h1>;
+        }
+        // 点击按钮
+        function Button(props){
+            return (
+                <button onClick={props.onClick}>
+                    点击按钮
+                </button>
+            );
+        }
+        // 结果
+        function Result(props){
+            let result = null;
+            if(props.bool){
+                result  = <Element1 />;
+            }else{
+                result  = <Element2 />;
+            }
+            return result;
+        }
+        class Element extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {bool: true};
+            }
+            changeState(props){
+                var val = props;
+                this.setState({bool: props});
+            }
+            render(){
+                var button  = null;
+                if(this.state.bool){
+                    button  = <Button onClick={this.changeState.bind(this,false)}/>;
+                }else{
+                    button  = <Button onClick={this.changeState.bind(this,true)}/>;
+                }
+                return (
+                    <div>
+                        <Result bool={this.state.bool} />
+                        {button}
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(
+            <Element />,
+            document.getElementById('root')
+        );
+
+    </script>
+    
+</body>
+</html>
